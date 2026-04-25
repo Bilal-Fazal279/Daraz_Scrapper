@@ -2,13 +2,12 @@ name: SastaDost Free Scraper
 
 on:
   schedule:
-    - cron: '0 */2 * * *'
-  workflow_dispatch:
+    - cron: '0 */2 * * *' # Runs every 2 hours
+  workflow_dispatch:      # Allows you to click "Run Workflow" manually
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
-    # Moving the Secret here makes it available to ALL steps below
     env:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
     
@@ -19,16 +18,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22' # Using 22 to match your Prisma engine requirement
+          node-version: '22'
 
       - name: Install Dependencies
-        working-directory: ./Daraz_scrapper
         run: npm install
 
       - name: Generate Prisma Client
-        working-directory: ./Daraz_scrapper
         run: npx prisma generate
 
       - name: Run Scraper
-        working-directory: ./Daraz_scrapper
         run: node src/main.js
