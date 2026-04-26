@@ -22,16 +22,23 @@ datasource db {
 }
 
 model product {
-  id            Int             @id @default(autoincrement())
-  daraz_id      String          @unique
-  name          String
-  image_url     String?
-  product_url   String
-  current_price Float
-  updated_at    DateTime        @default(now()) @updatedAt
-  prices        price_history[]
-  category_id  Int?      // Link product to category
-  category     categories? @relation(fields: [category_id], references: [id])
+  id              Int             @id @default(autoincrement())
+  daraz_id        String          @unique
+  name            String
+  image_url       String?
+  product_url     String
+  current_price   Float           
+  rating_score    Float?
+  review_count    String?
+  item_sold_count String?         
+  seller_name     String?
+  location        String?         
+  store           String?         @default("daraz")
+  
+  updated_at      DateTime        @default(now()) @updatedAt
+  prices          price_history[]
+  category_id     Int?
+  category        categories?     @relation(fields: [category_id], references: [id])
 }
 
 model price_history {

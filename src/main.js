@@ -188,6 +188,13 @@ const crawler = new BasicCrawler({
                         current_price: parseFloat(item.price) || 0,
                         product_url: item.itemUrl.startsWith('http') ? item.itemUrl : `https:${item.itemUrl}`,
                         image_url: item.image || null,
+                        rating_score: parseFloat(item.ratingScore) || 0,
+                        review_count: item.review ? String(item.review) : "0",
+                        seller_name: item.sellerName || "Unknown Seller",
+                        location: item.location || " ",
+                        item_sold_count: String(item.itemSoldCntShow || "0"), // Stored as TEXT
+                        category_id: categoryToScrape.id,
+                        store: "daraz"
                     })),
                     skipDuplicates: true,
                 });
