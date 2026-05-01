@@ -51,7 +51,7 @@ model price_history {
 
 model categories {
   id                Int      @id @default(autoincrement())
-  category_name     String
+  //category_name     String
   sub_category_name String
   sub_category_url  String   @unique 
   updated_at        DateTime @default(now()) @updatedAt
